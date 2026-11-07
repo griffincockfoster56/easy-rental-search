@@ -5,7 +5,7 @@
 
 <p align="center"><img src="media/1-found.png" width="820" alt="Easy Rental Search finding a cabin's own booking site"></p>
 
-<p align="center"><b><a href="media/easy-rental-search-demo.mp4">▶ Watch the 30-second demo</a></b> · <a href="media/easy-rental-search-demo-vertical.mp4">vertical version</a></p>
+<p align="center"><b><a href="https://easy-rental-search.vercel.app">▶ Watch the 30-second demo</a></b> · <a href="media/easy-rental-search-demo-vertical.mp4">vertical version</a></p>
 
 Lots of vacation rentals are run by owners or local property managers who also take bookings on their own website, usually without the 14%+ guest service fee. Easy Rental Search is a free, open-source Chrome extension that reads the listing you're looking at (photos, location, host, description) and goes looking for that site.
 

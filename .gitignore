@@ -3,3 +3,6 @@ node_modules/
 store/*.zip
 *.log
 .dev/
+site/.vercel/
+site/*.mp4
+site/*.png

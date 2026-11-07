@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Easy Rental Search — find a rental's own website, skip the booking fees</title>
+<meta name="description" content="Free, open-source Chrome extension. Found a rental on Airbnb or Vrbo? Find the same place on its own website and skip the booking fees.">
+<meta property="og:title" content="Easy Rental Search">
+<meta property="og:description" content="Found a rental on Airbnb or Vrbo? Find the same place on its own website and skip the booking fees.">
+<meta property="og:image" content="https://easy-rental-search.vercel.app/og.png">
+<meta property="og:video" content="https://easy-rental-search.vercel.app/demo-wide.mp4">
+<meta property="og:video:type" content="video/mp4">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://easy-rental-search.vercel.app/og.png">
+<link rel="icon" href="icon.png">
+<style>
+  *{box-sizing:border-box;margin:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,Inter,"Segoe UI",sans-serif;color:#fff8e7;min-height:100vh;
+    background:radial-gradient(120% 90% at 0% 0%,#1bb38c 0%,#0e8a6c 45%,#085846 100%);display:flex;flex-direction:column;align-items:center;padding:36px 18px 48px;gap:22px;text-align:center}
+  header{display:flex;align-items:center;gap:14px}
+  header img{width:56px;height:56px;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  h1{font-size:30px;letter-spacing:-.02em}
+  p.lead{font-size:18px;max-width:560px;opacity:.92;line-height:1.4}
+  em{font-style:normal;color:#ffc94d}
+  video{width:min(480px,100%);border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,.4);background:#0b3d31}
+  .btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  a.btn{padding:13px 20px;border-radius:12px;font-weight:700;text-decoration:none;color:#0b4a3b;background:#fff8e7}
+  a.btn.alt{background:rgba(255,255,255,.14);color:#fff8e7}
+  small{opacity:.75;max-width:520px;line-height:1.5}
+</style>
+</head>
+<body>
+  <header><img src="icon.png" alt=""><h1>Easy Rental Search</h1></header>
+  <p class="lead">Found a rental on Airbnb or Vrbo? Find the same place on its <em>own website</em> and skip the booking fees.</p>
+  <video src="demo.mp4" poster="og.png" controls autoplay muted loop playsinline></video>
+  <div class="btns">
+    <a class="btn" href="https://github.com/griffincockfoster56/easy-rental-search#install">Get the Chrome extension</a>
+    <a class="btn alt" href="https://github.com/griffincockfoster56/easy-rental-search">Source on GitHub</a>
+  </div>
+  <small>Free and open source. A real run on a live Airbnb listing, sped up. Chrome Web Store listing coming soon.</small>
+</body>
+</html>
