@@ -22,7 +22,7 @@ Open any Airbnb, Vrbo or Booking.com listing and click the Easy Rental Search ic
 
 In the demo above (a real, unedited run, sped up), it took about a minute to match an Airbnb cabin in Big Bear Lake to its property manager's own site, using the identical title, description wording and the Instagram handles in the listing, and it read that site's calendar for the requested dates.
 
-The free tools need no account. AI Deep Search uses your own [Anthropic API key](https://console.anthropic.com/settings/keys) (typically $0.20–$1 per search), stored only in your browser.
+The free tools need no account. AI Deep Search uses your own [Anthropic API key](https://console.anthropic.com/settings/keys) (typically $0.50–$2 per search), stored only in your browser.
 
 ## Install
 

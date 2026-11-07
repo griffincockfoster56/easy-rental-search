@@ -26,7 +26,7 @@ HOW TO USE
 2. Click the Easy Rental Search icon to open the side panel.
 3. Press "Find its own website", or use the free tools.
 
-AI Deep Search uses your own Anthropic API key (usually $0.20–$1 per search), stored only in your browser. The free tools need no key or account.
+AI Deep Search uses your own Anthropic API key (usually $0.50–$2 per search), stored only in your browser. The free tools need no key or account.
 
 PRIVATE & OPEN SOURCE
 No servers, no accounts, no analytics. Code: https://github.com/griffincockfoster56/easy-rental-search
