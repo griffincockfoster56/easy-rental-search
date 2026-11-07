@@ -121,12 +121,14 @@ export function extractListing() {
   if (locationSection) {
     const lines = locationSection.split("\n").map((s) => s.trim()).filter(Boolean);
     const i = lines.findIndex((l) => /where you.ll be/i.test(l));
-    locationText = lines.slice(i + 1, i + 3).find((l) => /,/.test(l)) || lines[1] || "";
+    locationText = lines.slice(i + 1, i + 3).find((l) => l.length < 70) || "";
   }
   // Airbnb og:title looks like "Home in Tahoe City · ★4.92 · 3 bedrooms · ..."
   const ogBits = (ogTitle || "").split(/\s+·\s+/);
   const kindAndPlace = ogBits[0] && / in /.test(ogBits[0]) ? ogBits[0] : "";
-  const address = ldAddress || locationText || (kindAndPlace ? kindAndPlace.split(" in ").slice(1).join(" in ") : "");
+  // Airbnb page titles end with "... for Rent in Big Bear Lake, California, United States - Airbnb"
+  const titlePlace = (document.title.match(/ in ([^-]+?,[^-]+?) - Airbnb$/) || [])[1] || "";
+  const address = [ldAddress, titlePlace, locationText].sort((a, b) => b.length - a.length)[0] || (kindAndPlace ? kindAndPlace.split(" in ").slice(1).join(" in ") : "");
   const facts = ogBits.slice(1).filter((b) => /bed|bath|guest|room|★/i.test(b));
   const overview = sectionText("OVERVIEW") || "";
   const overviewLine = overview.split("\n").find((l) => /guest|bedroom/i.test(l)) || "";

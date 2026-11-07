@@ -10,6 +10,8 @@ let listing = null;
 let settings = { apiKey: "", model: "claude-opus-5-5" };
 let controller = null;
 let currentTabId = null;
+// ?tab=<id> pins the panel to one tab (used when the panel is opened as a page for demos/tests).
+const pinnedTab = +new URLSearchParams(location.search).get("tab") || null;
 
 // ---------------- settings ----------------
 async function loadSettings() {
@@ -46,7 +48,7 @@ async function readTab(tabId) {
 }
 
 async function refresh() {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  const [tab] = pinnedTab ? [await chrome.tabs.get(pinnedTab)] : await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab) return;
   currentTabId = tab.id;
   let data = null;
@@ -84,7 +86,7 @@ function renderListing() {
   $("photoCount").textContent = `${l.photos.length} photos`;
   $("siteBadge").textContent = l.site;
   $("lTitle").textContent = l.title;
-  $("lSub").textContent = [l.subtitle, l.address].filter(Boolean).filter((v, i, a) => a.indexOf(v) === i).join(" · ");
+  $("lSub").textContent = l.subtitle && l.address && l.subtitle.includes(l.address) ? l.subtitle : [l.subtitle, l.address].filter(Boolean).join(" · ");
   const chips = [];
   (l.facts || []).slice(0, 4).forEach((f) => chips.push(esc(f)));
   if (l.hostName) chips.push(`Host: <b>${esc(l.hostName)}</b>`);
@@ -95,8 +97,10 @@ function renderListing() {
   // reverse image search grid
   $("photoGrid").innerHTML = l.photos
     .slice(0, 12)
-    .map((p, i) => `<button data-i="${i}" title="Search this photo"><img src="${esc(p)}" loading="lazy" alt=""></button>`)
+    .map((p, i) => `<button data-i="${i}" title="Search this photo"><img src="${esc(p)}" alt=""></button>`)
     .join("");
+  $("photoGrid").querySelectorAll("img").forEach((img) => (img.onerror = () => img.parentElement.remove()));
+  $("photoGrid").querySelectorAll("img").forEach((img) => img.addEventListener("load", () => img.naturalWidth < 20 && img.parentElement.remove()));
   show("engineMenu", false);
   $("photoGrid").querySelectorAll("button").forEach((b) => {
     b.onclick = () => {
@@ -135,6 +139,7 @@ $("deepBtn").onclick = async () => {
   show("results", false);
   show("progress");
   $("steps").innerHTML = "";
+  $("deepBtn").scrollIntoView({ behavior: "smooth", block: "start" });
   addStep("👀", `Studying ${Math.min(l.photos.length, 8)} photos and the listing details`);
   try {
     const out = await deepSearch({
@@ -145,6 +150,7 @@ $("deepBtn").onclick = async () => {
       onStep: (s) => addStep(s.kind === "search" ? "🔎" : "📄", s.kind === "search" ? s.text : prettyUrl(s.text)),
     });
     await chrome.storage.session.set({ [l.url]: out });
+    show("progress", false);
     if (listing && listing.url === l.url) renderResults(out);
   } catch (err) {
     if (listing && listing.url === l.url) {
@@ -199,19 +205,20 @@ function renderResults(out) {
   }
   if ((r.matches || []).length && listing) {
     const total = parseFloat(String(listing.total || "").replace(/[^\d.]/g, ""));
-    html += `<div class="card savings">💡 ${listing.site} typically adds a guest service fee of around 14%${total ? ` — on ${esc(listing.total)}, that's roughly <b>$${Math.round(total * 0.14).toLocaleString()}</b>` : ""}. Booking direct usually skips it. Compare the final price before you book.</div>`;
+    html += `<div class="card savings">💡 ${listing.site} guest service fees are often around 14–15%${total ? ` — on ${esc(listing.total)}, that's roughly <b>$${Math.round(total * 0.14).toLocaleString()}</b>` : ""}. Booking direct usually skips them. Compare the final price before you book.</div>`;
   }
   if (r.leads?.length) html += `<div class="card"><h3>Leads</h3><ul class="evidence">${r.leads.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`;
   if (out.cost != null) html += `<div class="cost muted">${out.searches || 0} web searches · ≈ $${out.cost.toFixed(2)} in API usage</div>`;
   $("results").innerHTML = html;
   show("results");
+  $("results").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 const safeUrl = (u) => (/^https?:\/\//i.test(u) ? u : "#");
 
 // ---------------- wiring ----------------
 chrome.tabs.onActivated.addListener(() => refresh());
 chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
-  if (tab.active && (info.status === "complete" || info.url)) refresh();
+  if ((pinnedTab ? tabId === pinnedTab : tab.active) && (info.status === "complete" || info.url)) refresh();
 });
 loadSettings();
 refresh();

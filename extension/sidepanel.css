@@ -98,7 +98,7 @@ main { padding: 12px; display: flex; flex-direction: column; gap: 12px; }
 .conf.low { background: #f0f1f0; color: var(--muted); }
 .bar { height: 5px; background: #eef1f0; border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
 .bar > i { display: block; height: 100%; background: linear-gradient(90deg, #12a07d, #0b6b55); }
-.evidence { margin: 0 0 8px; padding-left: 18px; font-size: 12.5px; color: #34433e; }
+.evidence { overflow-wrap: anywhere; margin: 0 0 8px; padding-left: 18px; font-size: 12.5px; color: #34433e; }
 .price-note { font-size: 12.5px; background: #fffaf0; border: 1px dashed #f0d79b; border-radius: 10px; padding: 7px 9px; margin-bottom: 10px; }
 .savings { font-size: 12.5px; }
 .cost { font-size: 11.5px; text-align: right; }
@@ -123,3 +123,4 @@ main { padding: 12px; display: flex; flex-direction: column; gap: 12px; }
 .empty h2 { margin: 6px 0 0; font-size: 18px; }
 .error { background: #fdecea; border: 1px solid #f5c2bd; color: #8a2a20; border-radius: 12px; padding: 10px 12px; font-size: 13px; }
 .foot { text-align: center; color: var(--muted); font-size: 12px; padding: 4px 0 16px; }
+#results, #deepBtn, #progress { scroll-margin-top: 70px; }

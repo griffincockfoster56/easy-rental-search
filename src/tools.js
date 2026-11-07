@@ -22,7 +22,8 @@ function distinctivePhrase(description) {
 export function textSearches(l) {
   const place = placeName(l);
   const out = [];
-  if (l.title) out.push({ label: "Exact listing title", q: `"${l.title}" ${EXCLUDE}` });
+  const title = (l.title || "").replace(/[•·|★✦♥]+/g, " ").replace(/\s+/g, " ").trim();
+  if (title) out.push({ label: "Exact listing title", q: `"${title}" ${EXCLUDE}` });
   const phrase = distinctivePhrase(l.description);
   if (phrase) out.push({ label: "Description phrase", q: `"${phrase}" ${EXCLUDE}` });
   if (l.hostName && !/^(airbnb|vrbo)$/i.test(l.hostName))

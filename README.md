@@ -3,6 +3,10 @@
 <h1 align="center">Easy Rental Search</h1>
 <p align="center"><b>Found a rental on Airbnb or Vrbo? Find the same place on its own website and skip the booking fees.</b></p>
 
+<p align="center"><img src="media/1-found.png" width="820" alt="Easy Rental Search finding a cabin's own booking site"></p>
+
+<p align="center"><b><a href="media/easy-rental-search-demo.mp4">▶ Watch the 30-second demo</a></b> · <a href="media/easy-rental-search-demo-vertical.mp4">vertical version</a></p>
+
 Lots of vacation rentals are run by owners or local property managers who also take bookings on their own website, usually without the 14%+ guest service fee. Easy Rental Search is a free, open-source Chrome extension that reads the listing you're looking at (photos, location, host, description) and goes looking for that site.
 
 ## What it does
@@ -13,6 +17,10 @@ Open any Airbnb, Vrbo or Booking.com listing and click the Easy Rental Search ic
 - **Reverse image search (free).** Tap any listing photo to search it on Google Lens, Bing, Yandex or TinEye. Owners reuse their photos on their own sites.
 - **Smart searches (free).** One-click Google searches for the exact title, a distinctive description phrase, the host or manager, and "book direct" rentals in the area, with the big booking platforms filtered out.
 - **Map.** Jump to the listing's approximate pin on Google Maps.
+
+<p align="center"><img src="media/3-searching.png" width="410" alt="AI agent searching"> <img src="media/4-reverse.png" width="410" alt="Free reverse image search"></p>
+
+In the demo above (a real, unedited run, sped up), it took about a minute to match an Airbnb cabin in Big Bear Lake to its property manager's own site, using the identical title, description wording and the Instagram handles in the listing, and it read that site's calendar for the requested dates.
 
 The free tools need no account. AI Deep Search uses your own [Anthropic API key](https://console.anthropic.com/settings/keys) (typically $0.20–$1 per search), stored only in your browser.
 
