@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Easy Rental Search</title>
+    <link rel="stylesheet" href="sidepanel.css" />
+  </head>
+  <body>
+    <header class="top">
+      <img src="icons/icon48.png" alt="" class="logo" />
+      <div class="brand">
+        <div class="name">Easy Rental Search</div>
+        <div class="tag">Skip the booking fees. Book direct.</div>
+      </div>
+      <button id="settingsBtn" class="icon-btn" title="Settings" aria-label="Settings">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.4-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3.3h-4l-.4 2.7a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.4L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.4 2.5-1c.5.4 1.1.7 1.7 1l.4 2.7h4l.4-2.7c.6-.3 1.2-.6 1.7-1l2.5 1 2-3.4-2.3-1.6ZM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" transform="translate(-1 0)"/></svg>
+      </button>
+    </header>
+
+    <section id="settings" class="card settings hidden">
+      <h3>AI Deep Search</h3>
+      <p class="muted">
+        Deep Search uses Claude with live web search to hunt for the property's own site. Bring your own
+        <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">Anthropic API key</a>.
+        It's stored only in this browser and sent only to api.anthropic.com. A search usually costs $0.20–$1.
+      </p>
+      <label class="field">
+        <span>API key</span>
+        <input id="apiKey" type="password" placeholder="sk-ant-..." autocomplete="off" spellcheck="false" />
+      </label>
+      <label class="field">
+        <span>Model</span>
+        <select id="model">
+          <option value="claude-opus-5-5">Claude Opus 5.5 (best)</option>
+          <option value="claude-sonnet-5-5">Claude Sonnet 5.5 (cheaper)</option>
+        </select>
+      </label>
+      <div class="row">
+        <button id="saveSettings" class="btn primary small">Save</button>
+        <span id="savedMsg" class="muted small hidden">Saved ✓</span>
+      </div>
+    </section>
+
+    <main id="main">
+      <section id="empty" class="empty hidden">
+        <div class="empty-art">🏡🔎</div>
+        <h2>Open a rental listing</h2>
+        <p class="muted">Go to a listing on <b>Airbnb</b>, <b>Vrbo</b> or <b>Booking.com</b>, then come back here. We'll look for the same place on its own website.</p>
+      </section>
+
+      <section id="loading" class="empty">
+        <div class="spinner big"></div>
+        <p class="muted">Reading the listing…</p>
+      </section>
+
+      <section id="listing" class="hidden">
+        <div class="card listing-card">
+          <div class="hero"><img id="heroImg" alt="" /><span id="photoCount" class="pill"></span><span id="siteBadge" class="pill site"></span></div>
+          <div class="pad">
+            <div id="lTitle" class="l-title"></div>
+            <div id="lSub" class="muted small"></div>
+            <div id="lMeta" class="meta"></div>
+          </div>
+        </div>
+
+        <button id="deepBtn" class="btn primary big">
+          <span class="sparkle">✦</span> Find its own website
+        </button>
+        <p id="deepHint" class="muted small center"></p>
+
+        <section id="progress" class="card hidden">
+          <div class="progress-head"><div class="spinner"></div><b id="progressTitle">Searching the web…</b><button id="cancelBtn" class="link">Cancel</button></div>
+          <ul id="steps" class="steps"></ul>
+        </section>
+
+        <section id="results" class="hidden"></section>
+
+        <section class="card">
+          <h3>Reverse image search <span class="free">free</span></h3>
+          <p class="muted small">Tap a photo to see where else it appears online. Owners reuse the same photos on their own site.</p>
+          <div id="photoGrid" class="photo-grid"></div>
+          <div id="engineMenu" class="engine-menu hidden"></div>
+        </section>
+
+        <section class="card">
+          <h3>Smart searches <span class="free">free</span></h3>
+          <div id="textSearches" class="links"></div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="foot">
+      Open source · <a href="https://github.com/griffincockfoster56/easy-rental-search" target="_blank" rel="noopener">GitHub</a>
+    </footer>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>

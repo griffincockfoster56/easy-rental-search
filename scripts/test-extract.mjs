@@ -1,0 +1,12 @@
+import { chromium } from "playwright";
+import fs from "node:fs";
+const url = process.argv[2];
+const src = fs.readFileSync("src/extract.js", "utf8").replace("export function", "function");
+const browser = await chromium.launch({ executablePath: process.env.PW_CHROME, headless: true });
+const ctx = await browser.newContext({ userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36", locale: "en-US", viewport: { width: 1280, height: 900 } });
+const page = await ctx.newPage();
+await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
+await page.waitForTimeout(6000);
+const data = await page.evaluate(`(${src.match(/function extractListing[\s\S]*/)[0]})()`.replace(/^\(function extractListing/, "(function extractListing").replace(/\)\(\)$/, ")()"));
+console.log(JSON.stringify({ ...data, photos: data.photos.length + " photos: " + data.photos.slice(0, 3).join(" "), description: data.description.slice(0, 300) }, null, 2));
+await browser.close();

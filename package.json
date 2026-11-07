@@ -1,0 +1,20 @@
+{
+  "name": "easy-rental-search",
+  "version": "1.0.0",
+  "description": "Chrome extension: find a vacation rental listing on its own website and skip the booking fees.",
+  "scripts": {
+    "build": "esbuild src/sidepanel.js --bundle --format=iife --target=chrome120 --minify --outfile=extension/sidepanel.js",
+    "icons": "node scripts/icons.mjs",
+    "zip": "npm run build && cd extension && rm -f ../store/easy-rental-search.zip && zip -qr ../store/easy-rental-search.zip . -x \".*\""
+  },
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "esbuild": "^0.27.3",
+    "playwright": "^1.65.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.6.0"
+  },
+  "private": true
+}
